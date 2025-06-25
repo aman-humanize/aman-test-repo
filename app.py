@@ -25,7 +25,7 @@ def authenticate(credentials: HTTPAuthorizationCredentials = Depends(security)):
 
 @app.get("/aman/test")
 def aman_test(token: str = Depends(authenticate)):
-    return {"message": "Authenticated access to /aman/test!"}
+    return {"name": "Aman"}
 
 @app.get("/aman/test2")
 def aman_test2(token: str = Depends(authenticate)):
