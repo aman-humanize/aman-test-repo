@@ -6,9 +6,10 @@ WORKDIR /app
 
 # Copy requirements if exists, else install FastAPI and Uvicorn
 COPY app.py ./
+COPY .env ./
 
 # Install FastAPI and Uvicorn
-RUN pip install fastapi uvicorn
+RUN pip install fastapi uvicorn python-dotenv
 
 # Expose port
 EXPOSE 8000
