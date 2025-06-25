@@ -1,3 +1,5 @@
+import os
+from dotenv import load_dotenv
 from fastapi import FastAPI, Depends, HTTPException, status
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from typing import Optional
@@ -8,8 +10,9 @@ app = FastAPI()
 # Simple Bearer token authentication
 security = HTTPBearer()
 
-# Hardcoded token for demonstration (replace with secure method in production)
-VALID_TOKEN = "supersecrettoken"
+# Load environment variables
+load_dotenv()
+VALID_TOKEN = os.environ.get("AUTH_TOKEN")
 
 def authenticate(credentials: HTTPAuthorizationCredentials = Depends(security)):
     if credentials.credentials != VALID_TOKEN:
