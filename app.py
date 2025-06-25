@@ -1,6 +1,7 @@
 from fastapi import FastAPI, Depends, HTTPException, status
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from typing import Optional
+from fastapi.responses import HTMLResponse
 
 app = FastAPI()
 
@@ -34,3 +35,18 @@ def aman_test3(token: str = Depends(authenticate)):
 @app.get("/health")
 def health_check():
     return {"status": "ok"}
+
+@app.get("/aman/name")
+def get_name(token: str = Depends(authenticate)):
+    return {"name": "Aman"}
+
+@app.get("/aman/name/html", response_class=HTMLResponse)
+def get_name_html():
+    return """
+    <html>
+        <head><title>Name Display</title></head>
+        <body>
+            <h1>Name: Aman</h1>
+        </body>
+    </html>
+    """
